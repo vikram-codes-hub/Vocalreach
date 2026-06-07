@@ -19,10 +19,10 @@
 
 VocalReach is a sophisticated, fully-automated cold outreach engine built for sales teams, growth hackers, and business development professionals. Simply provide a seed domain (e.g., `stripe.com`), and VocalReach will:
 
-- 🏢 **Discover** lookalike companies from 300M+ business database
-- 👥 **Extract** key decision makers with verified contact details
-- 📧 **Verify** professional email addresses in real-time
-- 🎯 **Personalize** and dispatch multi-variant email campaigns
+- 🏢 **Discover** lookalike companies from Apollo.io's 275M+ contact database
+- 👥 **Extract** key decision makers with verified contact details via Prospeo
+- 📧 **Find** professional email addresses in real-time using Hunter.io
+- 🎯 **Personalize** and dispatch multi-variant email campaigns via Brevo
 - 🔄 **Recover** from failures with automatic crash-resilient snapshots
 
 **Zero human touchpoints. 100% programmatic. Production-ready.**
@@ -31,7 +31,7 @@ VocalReach is a sophisticated, fully-automated cold outreach engine built for sa
 
 ---
 
-## � Table of Contents
+## 📋 Table of Contents
 
 - [🎯 Why VocalReach?](#-why-vocalreach)
 - [⚡ Key Features](#-key-features)
@@ -45,7 +45,6 @@ VocalReach is a sophisticated, fully-automated cold outreach engine built for sa
 - [🔗 API Integrations](#-api-integrations)
 - [📊 Performance](#-performance)
 - [❓ Troubleshooting](#-troubleshooting)
-- [🤝 Contributing](#-contributing)
 - [📝 License](#-license)
 
 ---
@@ -55,7 +54,7 @@ VocalReach is a sophisticated, fully-automated cold outreach engine built for sa
 | Challenge | Traditional Approach | VocalReach Solution |
 |:---|:---|:---|
 | **Time Investment** | Manual research, email hunting, verification | 🤖 Fully automated in minutes |
-| **Accuracy** | High bounce rates, invalid emails | ✅ 99%+ verified email deliverability |
+| **Accuracy** | High bounce rates, invalid emails | ✅ Verified email addresses via Hunter.io |
 | **Personalization** | Generic templates | 🎯 AI-driven role-based templates |
 | **Scalability** | Limited to manual capacity | 📈 Process 1000s of leads simultaneously |
 | **Reliability** | Process crashes = data loss | 🔄 Automatic recovery from any failure |
@@ -66,16 +65,16 @@ VocalReach is a sophisticated, fully-automated cold outreach engine built for sa
 ## ⚡ Key Features
 
 ### 🏢 **Multi-Source Company Discovery**
-Powered by **Ocean.io**, VocalReach identifies 1000+ lookalike companies matching your seed domain profile, segment, and industry characteristics with 95%+ accuracy.
+Powered by **Apollo.io**, VocalReach identifies lookalike companies matching your seed domain profile, segment, and industry characteristics from a 275M+ contact and company database.
 
 ### 👤 **Intelligent Decision Maker Mining**
-Using **Prospeo's** advanced algorithms, extract executives, job titles, LinkedIn URLs, and professional contact information for each discovered company—no guesswork.
+Using **Prospeo's** Search Person API, extract executives by seniority (C-Suite, Director, Head, Founder/Owner, Manager), job titles, LinkedIn URLs, and professional contact information for each discovered company—no guesswork.
 
-### 📧 **Enterprise-Grade Email Verification**
-**Eazyreach** real-time verification ensures every email is:
-- ✅ **Validated** against SMTP servers
-- 🔍 **Categorized** (Deliverable/Risky/Invalid)
-- 📊 **Scored** for deliverability confidence
+### 📧 **Real-Time Email Finding**
+**Hunter.io** email finder resolves professional email addresses for each contact:
+- ✅ **Found** against verified business email patterns
+- 🔍 **Domain-aware** email resolution
+- 📊 **Deduplicated** to avoid redundant outreach
 - 🛡️ **Reputation-safe** to protect domain sender score
 
 ### 💌 **Omnichannel Campaign Dispatch**
@@ -138,7 +137,7 @@ VocalReach orchestrates a sophisticated 4-stage pipeline, each optimized for spe
                                   ▼
                     ┌─────────────────────────────┐
                     │    STAGE 1: COMPANY HUNT    │  🏢
-                    │  (Ocean.io - 10-30s)        │
+                    │  (Apollo.io - 10-30s)       │
                     │                             │
                     │ ✓ Lookalike Discovery       │
                     │ ✓ Industry Classification   │
@@ -152,19 +151,19 @@ VocalReach orchestrates a sophisticated 4-stage pipeline, each optimized for spe
             │                                            │
             │  ✓ Executive Identification                │
             │  ✓ LinkedIn Profile Links                  │
-            │  ✓ Job Title & Department Mapping          │
+            │  ✓ Job Title & Seniority Filtering         │
             │  ✓ Direct Contact Attribution              │
             └────────────────────────────────────────────┘
                                   │
                                   ▼
        ┌──────────────────────────────────────────────────────┐
-       │  STAGE 3: EMAIL VERIFICATION & VALIDATION           │  📧
-       │  (Eazyreach - 20-90s depending on volume)           │
+       │  STAGE 3: EMAIL FINDING & RESOLUTION                │  📧
+       │  (Hunter.io - 20-90s depending on volume)           │
        │                                                      │
-       │  ✓ SMTP Real-Time Verification                      │
-       │  ✓ Domain Health Scoring                            │
+       │  ✓ Email Address Finder                             │
+       │  ✓ Domain-Based Resolution                          │
        │  ✓ Duplicate Elimination                            │
-       │  ✓ Deliverability Categorization                    │
+       │  ✓ Contact Enrichment                               │
        └──────────────────────────────────────────────────────┘
                                   │
                                   ▼
@@ -221,16 +220,13 @@ vocalreach/
 │   │                             # → Manages state & snapshots
 │   │
 │   ├── 🏢 stages/ (API Clients)
-│   │   ├── ocean.ts              # Stage 1: Lookalike Company Mining
-│   │   ├── prospeo.ts            # Stage 2: Decision Maker Discovery
-│   │   ├── eazyreach.ts          # Stage 3: Email Verification
+│   │   ├── apollo.ts             # Stage 1: Lookalike Company Mining
+│   │   ├── prospeo.ts            # Stage 2 & 3: Decision Maker Discovery + Email Resolution
 │   │   └── brevo.ts              # Stage 4: Campaign Dispatch
 │   │
 │   ├── ✔️ validators/ (Zod Schemas)
 │   │   ├── env.validator.ts      # Runtime environment validation
-│   │   ├── ocean.schema.ts       # Ocean.io response schema
 │   │   ├── prospeo.schema.ts     # Prospeo response schema
-│   │   ├── eazyreach.schema.ts   # Eazyreach response schema
 │   │   └── brevo.schema.ts       # Brevo API request schema
 │   │
 │   ├── 🛠️ utils/ (Shared Utilities)
@@ -262,9 +258,8 @@ vocalreach/
 │       └── index.ts              # Shared TypeScript interfaces
 │
 ├── 🧪 tests/ (Unit Tests)
-│   ├── ocean.test.ts
+│   ├── apollo.test.ts
 │   ├── prospeo.test.ts
-│   ├── eazyreach.test.ts
 │   ├── brevo.test.ts
 │   └── pipeline.test.ts
 │
@@ -286,9 +281,9 @@ Before getting started, ensure you have the following:
 - **Node.js** v18 or higher ([Download](https://nodejs.org/))
 - **Git** for version control
 - **Valid API Keys** from all four platforms:
-  - 🌍 [Ocean.io](https://ocean.io/) - Company database
-  - 👤 [Prospeo](https://prospeo.io/) - Email finder
-  - 📧 [Eazyreach](https://eazyreach.com/) - Email verification
+  - 🏢 [Apollo.io](https://apollo.io/) - Company & contact database
+  - 👤 [Prospeo](https://prospeo.io/) - Decision maker finder
+  - 📧 [Hunter.io](https://hunter.io/) - Email finder
   - 💌 [Brevo](https://www.brevo.com/) - Email delivery (formerly Sendinblue)
 
 ### 1️⃣ Clone the Repository
@@ -320,10 +315,10 @@ nano .env  # or use your preferred editor
 
 ```ini
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# Ocean.io Configuration
+# Apollo.io Configuration
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-OCEAN_API_KEY=your_ocean_api_key_here
-# Get from: https://app.ocean.io/settings
+APOLLO_API_KEY=your_apollo_api_key_here
+# Get from: https://developer.apollo.io/keys/
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # Prospeo Configuration
@@ -332,10 +327,10 @@ PROSPEO_API_KEY=your_prospeo_api_key_here
 # Get from: https://app.prospeo.io/settings/api
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# Eazyreach Configuration
+# Hunter.io Configuration
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-EAZYREACH_API_KEY=your_eazyreach_api_key_here
-# Get from: https://app.eazyreach.com/settings
+HUNTER_API_KEY=your_hunter_api_key_here
+# Get from: https://hunter.io/api-keys
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # Brevo (Sendinblue) Configuration
@@ -430,7 +425,7 @@ npx ts-node src/index.ts stripe.com --dry-run --limit 5
 # Output:
 # ✅ Stage 1: 5 companies found
 # ✅ Stage 2: 23 contacts discovered
-# ✅ Stage 3: 18 emails verified
+# ✅ Stage 3: 18 emails resolved
 # 🛡️ Checkpoint: Review data, then press 'No' to exit safely
 ```
 
@@ -440,11 +435,11 @@ npx ts-node src/index.ts stripe.com --dry-run --limit 5
 npx ts-node src/index.ts stripe.com --limit 100
 
 # Pipeline will:
-# 1. Find 100 similar companies
-# 2. Extract 300-400 decision makers
-# 3. Verify 200-300 valid emails
+# 1. Find 100 similar companies via Apollo.io
+# 2. Extract 300-400 decision makers via Prospeo
+# 3. Resolve 200-300 emails via Hunter.io
 # 4. Present interactive checkpoint
-# 5. Send personalized emails with tracking
+# 5. Send personalized emails with tracking via Brevo
 ```
 
 #### Scenario 3: Resume After Interruption
@@ -475,7 +470,7 @@ Before any emails are dispatched, VocalReach presents a comprehensive summary wi
 ║                                                                    ║
 ║  Companies Discovered                      8                       ║
 ║  Unique Contacts Found                     42                      ║
-║  Email Addresses Verified                  34                      ║
+║  Email Addresses Resolved                  34                      ║
 ║  After Deduplication                       32                      ║
 ║                                                                    ║
 ║  Estimated Campaign Reach                  32 prospects             ║
@@ -545,10 +540,10 @@ When you select "Preview email templates first", VocalReach displays actual emai
 
 Each stage is a self-contained API client handling rate limiting, retry logic, and response validation:
 
-#### Stage 1: Ocean.io (Company Discovery)
+#### Stage 1: Apollo.io (Company Discovery)
 ```typescript
-// src/stages/ocean.ts
-interface OceanRequest {
+// src/stages/apollo.ts
+interface ApolloRequest {
   domain: string;
   limit?: number;
 }
@@ -557,56 +552,59 @@ interface CompanyResult {
   name: string;
   domain: string;
   industry: string;
-  employees: number;
-  location: string;
+  size: string;
 }
 ```
-- 🔗 Finds companies similar to seed domain
-- 📊 Returns up to 1000+ results
-- ⏱️ Rate limit: Concurrent threshold (configured)
+- 🔗 Finds companies similar to seed domain via Apollo organization search
+- 📊 Returns up to 1000+ results with industry & size metadata
+- 🚫 Built-in blocklist for generic domains (Google, Amazon, LinkedIn, etc.)
 - 🔄 Automatic retry with exponential backoff
 
-#### Stage 2: Prospeo (Contact Mining)
+#### Stage 2: Prospeo (Decision Maker Mining)
 ```typescript
+// src/stages/prospeo.ts - findDecisionMakers()
 interface ProspeoRequest {
   domain: string;
-  companyName: string;
+  seniority: string[]; // C-Suite, Director, Head, Founder/Owner, Manager
 }
 
 interface ContactResult {
-  name: string;
+  firstName: string;
+  lastName: string;
+  fullName: string;
   title: string;
-  department: string;
-  linkedinUrl: string;
-  email?: string;
+  linkedinUrl?: string;
+  companyName: string;
+  companyDomain: string;
 }
 ```
-- 👥 Extracts executives and decision makers
+- 👥 Extracts executives and decision makers via Search Person API
 - 🔗 Links to LinkedIn profiles
-- 🎯 Supports department & title filtering
-- ⏱️ Rate limit: 2 requests/second
+- 🎯 Seniority-level filtering (C-Suite, Director, Head, Founder, Manager)
+- ⏱️ Rate limited with Bottleneck
 
-#### Stage 3: Eazyreach (Email Verification)
+#### Stage 3: Hunter.io (Email Resolution)
 ```typescript
-interface VerificationRequest {
-  email: string;
+// src/stages/prospeo.ts - resolveEmails()
+interface HunterRequest {
   domain: string;
+  first_name: string;
+  last_name: string;
 }
 
-interface VerificationResult {
+interface EnrichedContact {
   email: string;
-  status: "deliverable" | "risky" | "invalid";
-  confidence: number; // 0-100
-  reason?: string;
+  // ...plus all Contact fields
 }
 ```
-- ✅ Real-time SMTP verification
-- 📊 Confidence scoring (0-100)
-- 🛡️ Protects sender reputation
-- ⏱️ Rate limit: 5 requests/second
+- 📧 Finds professional email addresses via Hunter.io Email Finder API
+- 🔍 Domain + first/last name based resolution
+- 🛡️ Deduplication to protect sender reputation
+- ⏱️ Rate limited alongside Prospeo requests
 
 #### Stage 4: Brevo (Email Dispatch)
 ```typescript
+// src/stages/brevo.ts
 interface CampaignRequest {
   to: Array<{ email: string; name: string }>;
   subject: string;
@@ -614,7 +612,7 @@ interface CampaignRequest {
   from: { email: string; name: string };
 }
 ```
-- 💌 Batch email dispatch
+- 💌 Batch email dispatch via transactional API
 - 📊 Open & click tracking enabled
 - 🔗 Unsubscribe link injection
 - ⏱️ Rate limit: Configurable concurrency
@@ -626,16 +624,16 @@ interface CampaignRequest {
 Every API response is validated at runtime to catch breaking changes immediately:
 
 ```typescript
-// Example: Ocean response validation
-export const oceanCompanySchema = z.object({
-  name: z.string(),
-  domain: z.string().url().optional(),
-  employees: z.number().min(1),
-  industry: z.string(),
+// Example: Prospeo response validation
+export const prospeoContactSchema = z.object({
+  first_name: z.string(),
+  last_name: z.string(),
+  job_title: z.string().optional(),
+  linkedin_url: z.string().url().optional(),
 });
 
 // Usage:
-const parsed = oceanCompanySchema.parse(apiResponse);
+const parsed = prospeoContactSchema.parse(apiResponse);
 // Throws ZodError if schema doesn't match
 ```
 
@@ -652,14 +650,14 @@ const parsed = oceanCompanySchema.parse(apiResponse);
 #### Rate Limiter (`utils/limiter.ts`)
 Uses **Bottleneck** to queue API requests:
 ```typescript
-export const oceanLimiter = new Bottleneck({
+export const apolloLimiter = new Bottleneck({
   minTime: 200, // ms between requests
   maxConcurrent: 5,
 });
 
 // Usage in stages
-const result = await oceanLimiter.schedule(() =>
-  axios.get('https://api.ocean.io/...')
+const result = await apolloLimiter.schedule(() =>
+  axios.post('https://api.apollo.io/...')
 );
 ```
 
@@ -687,7 +685,7 @@ Winston logger with file + console output:
 CLI formatting and progress visualization:
 ```
 Company Mining Progress: ████████░░ 80% (8/10)
-Email Verification:      ███████░░░ 70% (7/10 verified)
+Email Resolution:        ███████░░░ 70% (7/10 resolved)
 ```
 
 ---
@@ -767,11 +765,11 @@ Every stage creates a JSON snapshot for crash recovery:
   "runId": "run-1717629465123",
   "seedDomain": "stripe.com",
   "startTime": "2024-06-06T10:00:00Z",
-  "currentStage": "EAZYREACH_COMPLETED",
+  "currentStage": "STAGE3_COMPLETED",
   "stageTimings": {
-    "OCEAN_COMPLETED": 35000,
-    "PROSPEO_COMPLETED": 120000,
-    "EAZYREACH_COMPLETED": 180000
+    "STAGE1_COMPLETED": 35000,
+    "STAGE2_COMPLETED": 120000,
+    "STAGE3_COMPLETED": 180000
   },
   "data": {
     "companies": [
@@ -779,26 +777,23 @@ Every stage creates a JSON snapshot for crash recovery:
         "name": "Company A",
         "domain": "companya.com",
         "industry": "SaaS",
-        "employees": 250,
-        "location": "San Francisco"
+        "size": "250"
       }
     ],
     "contacts": [
       {
-        "name": "Jane Smith",
+        "fullName": "Jane Smith",
         "title": "VP Sales",
-        "department": "Sales",
-        "company": "Company A",
+        "companyName": "Company A",
+        "companyDomain": "companya.com",
         "linkedinUrl": "linkedin.com/in/jane-smith"
       }
     ],
-    "verifiedEmails": [
+    "enrichedContacts": [
       {
         "email": "jane.smith@companya.com",
-        "name": "Jane Smith",
-        "status": "deliverable",
-        "confidence": 95,
-        "company": "Company A"
+        "fullName": "Jane Smith",
+        "companyName": "Company A"
       }
     ]
   },
@@ -817,7 +812,7 @@ Every stage creates a JSON snapshot for crash recovery:
 $ npx ts-node src/index.ts --resume output/run-1717629465123.json
 
 # VocalReach:
-# 1. Loads snapshot (companies, contacts, verified emails)
+# 1. Loads snapshot (companies, contacts, enriched emails)
 # 2. Skips Stages 1-3
 # 3. Continues with any remaining tasks
 # 4. Presents checkpoint for Stage 4
@@ -827,35 +822,35 @@ $ npx ts-node src/index.ts --resume output/run-1717629465123.json
 
 ## 🔗 API Integrations
 
-### Ocean.io - Company Intelligence
+### Apollo.io - Company Intelligence
 | Feature | Details |
 |:---|:---|
-| **Database Size** | 300M+ companies globally |
-| **Company Matching** | Lookalike similarity scoring |
-| **Data Fields** | Name, domain, industry, employees, location, funding |
+| **Database Size** | 275M+ contacts, 60M+ companies |
+| **Company Matching** | Organization domain search |
+| **Data Fields** | Name, domain, industry, employee count |
 | **Rate Limit** | Configurable concurrency |
 | **Response Time** | ~2-5s per request |
-| **Docs** | [ocean.io/docs](https://ocean.io/docs) |
+| **Docs** | [apollo.io/docs](https://apolloio.github.io/apollo-api-docs/) |
 
 ### Prospeo - B2B Contact Database
 | Feature | Details |
 |:---|:---|
-| **Database Size** | 500M+ business contacts |
-| **Search Scope** | By domain, company name, LinkedIn |
-| **Data Fields** | Name, title, email, LinkedIn URL, phone |
-| **Rate Limit** | 2 requests/second |
-| **Accuracy** | 98% valid business emails |
+| **Search Scope** | By domain, seniority, department |
+| **Data Fields** | Name, title, LinkedIn URL, person ID |
+| **Seniority Filters** | C-Suite, Director, Head, Founder, Manager |
+| **Rate Limit** | Bottleneck-managed concurrency |
+| **Accuracy** | High-quality B2B profiles |
 | **Docs** | [prospeo.io/api](https://prospeo.io/api) |
 
-### Eazyreach - Email Verification
+### Hunter.io - Email Finder
 | Feature | Details |
 |:---|:---|
-| **Verification Type** | Real-time SMTP validation |
-| **Status Categories** | Deliverable / Risky / Invalid |
-| **Confidence Scoring** | 0-100 scale |
-| **Rate Limit** | 5 requests/second |
-| **Verification Accuracy** | 99%+ precision |
-| **Docs** | [eazyreach.com/api](https://eazyreach.com/api) |
+| **Finder Type** | First name + last name + domain lookup |
+| **Endpoint** | `/v2/email-finder` |
+| **Deduplication** | Built-in email deduplication |
+| **Rate Limit** | Bottleneck-managed |
+| **Coverage** | 100M+ email addresses indexed |
+| **Docs** | [hunter.io/api](https://hunter.io/api-documentation) |
 
 ### Brevo - Email Delivery
 | Feature | Details |
@@ -865,7 +860,7 @@ $ npx ts-node src/index.ts --resume output/run-1717629465123.json
 | **Tracking** | Open + click tracking |
 | **Features** | Bounce handling, unsubscribe management |
 | **Compliance** | GDPR, CAN-SPAM, CASL compliant |
-| **Docs** | [brevo.com/api](https://brevo.com/api) |
+| **Docs** | [brevo.com/api](https://developers.brevo.com/) |
 
 ---
 
@@ -875,9 +870,9 @@ $ npx ts-node src/index.ts --resume output/run-1717629465123.json
 
 | Stage | Volume (10 companies) | Time | Volume (50 companies) | Time |
 |:---|:---|:---|:---|:---|
-| **Stage 1: Ocean** | 10 companies | 20-40s | 50 companies | 30-60s |
+| **Stage 1: Apollo** | 10 companies | 10-30s | 50 companies | 20-50s |
 | **Stage 2: Prospeo** | 40-50 contacts | 30-90s | 150-200 contacts | 60-180s |
-| **Stage 3: Eazyreach** | 30-40 emails | 15-45s | 100-150 emails | 45-180s |
+| **Stage 3: Hunter.io** | 30-40 emails | 15-45s | 100-150 emails | 45-180s |
 | **Checkpoint** | User interaction | 10-30s | User interaction | 10-30s |
 | **Stage 4: Brevo** | 25-30 emails | 5-15s | 80-120 emails | 10-30s |
 | **TOTAL** | - | ~2-4 minutes | - | ~3-7 minutes |
@@ -886,7 +881,7 @@ $ npx ts-node src/index.ts --resume output/run-1717629465123.json
 
 1. **Concurrency**: Use rate limiters to maximize throughput without hitting API limits
 2. **Batching**: Process contacts in batches for Brevo dispatch
-3. **Deduplication**: Remove duplicate emails before verification (saves API calls)
+3. **Deduplication**: Remove duplicate emails before resolution (saves API calls)
 4. **Caching**: Snapshot system avoids re-querying failed stages
 
 ### Memory & Resource Usage
@@ -907,7 +902,7 @@ $ npx ts-node src/index.ts --resume output/run-1717629465123.json
 **Symptom:**
 ```
 Error: 401 Unauthorized - Invalid API key
-  at Stage1Ocean.execute()
+  at Stage1Apollo.execute()
 ```
 
 **Solutions:**
@@ -942,31 +937,30 @@ Error: ECONNABORTED - Request timeout after 10000ms
 3. Use `--resume` to restart from last checkpoint
 4. Try again later (might be provider outage)
 
-#### ❌ "Email Verification Failed" Error
+#### ❌ "Email Not Found" Warning
 
 **Symptom:**
 ```
-Verification Error: Unable to verify email.com
+No email found for Jane Smith
 ```
 
 **Solutions:**
-1. Check Eazyreach API key validity
-2. Verify domain reputation isn't blacklisted
-3. Some corporate domains block SMTP verification
-4. These emails marked "risky" (still sendable)
+1. Check Hunter.io API key validity and quota
+2. Some contacts may not have indexed emails
+3. Try running with a different seed domain
+4. Verify the contact's domain is reachable
 
-#### ⚠️ "Low Verification Rate" Warning
+#### ⚠️ "Low Email Resolution Rate" Warning
 
 **Symptom:**
 ```
-Only 40% of emails verified. Campaign may have low reach.
+Only 40% of contacts had emails resolved.
 ```
 
 **Solutions:**
-1. Some corporate domains don't allow SMTP verification
-2. "Risky" emails still deliverable (default included)
-3. Lower trust scores for unverified - adjust in checkpoint
-4. Consider seed domain - some industries harder to reach
+1. Some corporate domains don't have indexed emails in Hunter.io
+2. Increase `--limit` to discover more companies
+3. Consider alternative seed domains in the same industry
 
 #### 🔄 "Resume Failed" Error
 
